@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mayahi.Camera</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ドライフラワー作家によるカメラ・Web制作・ポートフォリオサイト。技術 × 想い × 成長 をテーマに、作品と表現を発信しています。">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <style>
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .background-wrapper video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .wrapper {
+            margin: 0 auto;
+            padding: 0;
+            font-size: 100%;
+            color: #707070;
+            font-family: sans-serif;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            color: #707070;
+            text-decoration: none;
+        }
+
+        a:hover {
+            opacity: 0.7;
+        }
+
+        .contents_width {
+
+            padding: 0 35px;
+        }
+
+
+
+        #headline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 35px;
+            padding-right: 35px;
+            background-color: #fff;
+            height: 100px;
+        }
+
+        #headline .logo {
+            max-width: 190px;
+            line-height: 0;
+        }
+
+        #headline .navi {
+            display: flex;
+            align-items: center;
+        }
+
+        #headline .navi li {
+            font-size: 14px;
+            margin-left: 40px;
+        }
+
+        .mainvisual {
+            aspect-ratio: 16/9;
+            margin: 40px 0 80px;
+        }
+
+        .introducion {
+            margin-bottom: 100px;
+            text-align: center;
+            background-color: #ffffffb5;
+            color: #333;
+            padding: 70px;
+        }
+
+        .introducion .catchphrase {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 24px;
+        }
+
+        .introducion .text {
+            font-size: 14px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-weight: normal;
+            margin-bottom: 40px;
+        }
+
+        .section-title .en {
+            font-size: 40px;
+            display: block;
+        }
+
+        .section-title .ja {
+            font-size: 14px;
+            display: block;
+            padding-left: 30px;
+        }
+
+        #latest_article {
+            display: flex;
+            align-items: stretch;
+            overflow: hidden;
+            margin-bottom: 120px;
+            gap: 30px;
+            color: #333;
+            width: 100%;
+        }
+
+        #latest_article .iframe-wrapper {
+            width: 50%;
+        }
+
+        #latest_article .detail {
+            width: 50%;
+            padding-right: 30px;
+            background-color: #ffffffb5;
+            padding: 30px;
+        }
+
+        #latest_article .detail p {
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        #works {
+            margin-bottom: 100px;
+            background-color: #ffffffb5;
+            color: #333;
+            padding-top: 30px;
+        }
+
+        #works .section-title {
+            padding-left: 30px;
+        }
+
+        .works-list {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .iframe-wrapper {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #latest_article .iframe-wrapper {
+            position: relative;
+            aspect-ratio: 10/ 9;
+            width: 50%;
+            overflow: hidden;
+            background-color: #ffffffb5;
+        }
+
+        .works-list .iframe-wrapper {
+            position: relative;
+            aspect-ratio: 8 / 12;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .iframe-scaler {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            width: 125%;
+            height: 125%;
+            transform: scale(0.8);
+            transform-origin: top left;
+        }
+
+        .iframe-scaler iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        #footerline {
+            font-size: 12px;
+            padding: 20px 0;
+            text-align: center;
+            background-color: #fff;
+            height: 100px;
+        }
+
+        .works-list .iframe-wrapper {
+            position: relative;
+            aspect-ratio: 15 / 21;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        @media (max-width: 999px) {
+            #headline {
+                padding: 25px 0;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            #headline .navi li {
+                font-size: 14px;
+                margin-left: 10px;
+            }
+
+            #headline {
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            #header .logo {
+                max-width: 120px;
+            }
+
+            .mainvisual {
+                margin-top: 20px;
+                margin-bottom: 40px;
+            }
+
+            .introducion {
+                margin-bottom: 60px;
+                padding: 15px 15px;
+            }
+
+            .section-title .en {
+                font-size: 32px;
+            }
+
+            #works .section-title {
+                padding-left: 10px;
+            }
+
+            #latest_article {
+                flex-direction: column-reverse;
+                margin-bottom: 60px;
+            }
+
+            #latest_article .iframe-wrapper,
+            #latest_article .detail {
+                width: 100%;
+                margin-bottom: 20px;
+                padding: 10px;
+            }
+
+            .works-list {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .works-list li {
+                width: 100%;
+                margin: 0 0 20px;
+            }
+
+            .contents_width {
+
+                padding: 0px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-wrapper">
+        <video src="https://mayahi-cr8log.github.io/blogger-assets/video/camera_bg.mp4" autoplay muted loop
+            playsinline></video>
+    </div>
+
+
+    <div id="headline" class="contents_width">
+        <h1 class="logo">
+            <a href="index.html">
+                Mayahi.Camera
+            </a>
+        </h1>
+        <nav>
+            <ul class="navi">
+                <li><a href="https://www.blogger.com/profile/17026569411662165544">profile</a></li>
+                <li><a href="https://mayahi-cr8log.github.io/Myportforio1/">portfolio</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- ボタン-------------------------------------------------------------------------->
+    <div class="contents_width" style="text-align:right; margin: 1.5em auto; max-width: 100%;">
+        <button onclick="(function(){
+    var menu = document.getElementById('layoutDropdown');
+    if(menu.style.display === 'block'){ menu.style.display = 'none'; }
+    else { menu.style.display = 'block'; }
+  })()" style="background-color:#333333; color:#fff; padding:10px 16px; font-size:15px; border:none; border-radius:5px; cursor:pointer;">
+            🔳 BlogへGOΣ(ﾟДﾟ)
+        </button>
+
+        <div id="layoutDropdown"
+            style="display:none; margin-top:10px; background:#fff; border:1px solid #ccc; border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.2); text-align:left; padding:10px;">
+
+            <div style="margin-bottom:15px;">
+                <a href="https://mayahi-cr8log.blogspot.com/search/label/camera" target="_blank"
+                    style="font-weight:bold; color:#333; text-decoration:none; font-size:15px;">カメラ</a>
+                <div style="color:#666; font-size:13px; line-height:1.4;">写真を通して、デザインの感覚を育てています。</div>
+            </div>
+
+            <div style="margin-bottom:15px;">
+                <a href="#" target="_blank"
+                    style="font-weight:bold; color:#333; text-decoration:none; font-size:15px;">WEB　準備中</a>
+                <div style="color:#666; font-size:13px; line-height:1.4;">Web制作の感覚とノウハウを、レベル別に発信中</div>
+            </div>
+
+            <div style="margin-bottom:15px;">
+                <a href="#" target="_blank"
+                    style="font-weight:bold; color:#333; text-decoration:none; font-size:15px;">works　準備中</a>
+                <div style="color:#666; font-size:13px; line-height:1.4;">制作物＋解説ブログで、つくる過程も共有中</div>
+            </div>
+
+            <div style="margin-bottom:15px;">
+                <a href="#" target="_blank"
+                    style="font-weight:bold; color:#333; text-decoration:none; font-size:15px;">contact　準備中</a>
+                <div style="color:#666; font-size:13px; line-height:1.4;">連絡はこちらからお願いいします。</div>
+            </div>
+
+        </div>
+    </div>
+    <!--変更ボタン-------------------------------------------------------------------------->
+    <div class="wrapper">
+        <div class="mainvisual">
+            <div class="iframe-wrapper">
+                <div class="iframe-scaler">
+                    <iframe title="Main Visual Slider"
+                        src="https://mayahi-cr8log.github.io/blogger-assets/main_visual_slider/main_visual_slider.html"
+                        loading="lazy" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <main class="contents_width">
+            <div class="introducion">
+                <p class="catchphrase">カメラブログについて</p>
+                <p class="text">
+                    デザインの感覚を鍛えるために始めたカメラ。
+                    構図や光のバランス、被写体の切り取り方──そのすべてが、Web制作にも通じる「視覚のセンス」につながっています。
+                    このブログでは、そんな写真の面白さや撮影技術を、自分なりの視点で記録・発信しています。
+                </p>
+            </div>
+
+            <section id="latest_article">
+                <div class="iframe-wrapper">
+                    <div class="iframe-scaler">
+                        <iframe title="Profile Animation"
+                            src="https://mayahi-cr8log.github.io/blogger-assets/cameranewsectionscroll/newsectionscroll.html"
+                            loading="lazy" allowfullscreen class="custom-iframe"></iframe>
+                    </div>
+                </div>
+                <div class="detail" id="profile">
+                    <h2 class="section-title">
+                        <span class="en">Learning and Trying</span>
+                        <span class="ja">（学びと挑戦）</span>
+                    </h2>
+                    <p>
+                        <p>写真を撮ることは、ただの記録ではなく、表現の一つ。</p>
+                        <p>——構図、色のバランス、光のとらえ方——</p>
+                        <p>カメラを通して得た気づきは、デザインやWeb制作にも活きています。</p>
+
+                        <p>ここでは、そんな「カメラを通じた学びと挑戦」をまとめています。</p>
+                        <p>風景、日常、作品づくりの視点から、気づいたこと・試したことを綴った記録です。</p>
+
+                        <p>写真がもっと楽しくなるヒントや、ものづくりのインスピレーションとして、</p>
+                        <p>気ままにご覧いただけたらうれしいです。
+                    </p>
+                </div>
+            </section>
+
+            <section id="works">
+                <h2 class="section-title">
+                    <span class="en">Works</span>
+                    <span class="ja">作品一覧</span>
+                </h2>
+                <ul class="works-list">
+                    <li class="iframe-wrapper">
+                        <div class="iframe-scaler">
+                            <iframe title="Grid UI Work"
+                                src="https://mayahi-cr8log.github.io/blogger-assets/gridUI/gridUI.html" loading="lazy"
+                                allowfullscreen class="custom-iframe"></iframe>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </main>
+    </div>
+    <div id="footerline" class="contents_width">
+        <p class="copyright">© Mayahi.Cr8log</p>
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>
